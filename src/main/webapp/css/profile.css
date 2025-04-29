@@ -1,0 +1,130 @@
+@charset "UTF-8";
+
+/* profile.css */
+/* profile.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: grey;
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+    padding-top: -10px; /* Adjust for header height */
+}
+
+.sidebar {
+    width: 350px;
+    background-color: #000000;
+    color: #fff;
+    padding: 25px;
+    
+}
+
+.sidebar a {
+    display: flex;
+    align-items: center;
+    color: #ecf0f1;
+    text-decoration: none;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    transition: background 0.3s;
+    font-size: 28px;
+    font-family: 'Jomolhari';        
+}
+
+.sidebar a i {
+    margin-right: 10px;
+}
+
+.sidebar a:hover, .sidebar a.active {
+    background-color: #ECDFCC;
+    color: #000000;
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+    background-color: #101010;
+}
+
+.profile-section {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #ECDFCC;
+    font-size: 30px;   
+    font-family: 'Jomolhari';    
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 20px; 
+    background-color: #222;
+	color: white;       
+}
+
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 20px; 
+    background-color: #222;
+	color: white;       
+}
+
+
+.note {
+    font-size: 16px;
+    color: #666;
+    margin-top: 5px;
+}
+
+.note a {
+    color: orange;
+    text-decoration: none;
+}
+
+.note a:hover {
+    text-decoration: underline;
+}
+
+.save-btn {
+    display: block;
+    width: 100%;
+    padding: 20px;
+    background-color: grey;
+    color: #ECDFCC;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.save-btn:hover {
+    background-color: #484848;
+}
+
+

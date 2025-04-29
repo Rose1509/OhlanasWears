@@ -1,0 +1,460 @@
+@charset "UTF-8";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color:  #0a0a0a;
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    overflow-x: hidden;
+    --border-color: #2a2a2a;
+    font-size: 20px; /* Base font size increased */
+}
+
+/* Sidebar */
+.sidebar {
+    width: 300px; 
+    background-color: #0f0f0f;
+    padding: 20px 0;
+    border-right: #2a2a2a;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    position: fixed;
+    transition: all 0.3s ease;
+}
+
+.sidebar-logo {
+    padding: 25px 25px;
+    font-size: 26px; 
+    border-bottom: #2a2a2a;
+    margin-bottom: 20px;
+}
+
+.sidebar-logo h2 {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: #ECDFCC;
+    font-size: 30px; 
+    font-family: "Kalnia";
+}
+
+.sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.menu-item {
+    padding: 16px 25px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-decoration: none;
+    font-size: 30px; 
+    font-weight: 500;
+    transition: all 0.3s ease;
+    color: #ECDFCC;
+    font-family: "Kdam Thmor";
+    
+}
+
+.menu-item:hover, .menu-item.active {
+    background-color: #ECDFCC;
+    color: #000000;
+    border-left: #e6d8c3;
+    padding-left: 21px;
+}
+
+.menu-item i {
+    font-size: 30px; /* Larger icons */
+    width: 24px;
+    text-align: center;
+}
+
+.sidebar-footer {
+    padding: 20px 25px;
+    border-top: 1px solid var(--border-color);
+}
+
+.logout-btn {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: #ECDFCC;
+    text-decoration: none;
+    font-size: 25px; 
+    transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+    background-color: #ECDFCC;
+    color: #000000;
+    border-left: #e6d8c3;
+    padding-left: 21px;}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    margin-left: 280px; 
+    padding: 30px;
+    width: calc(100% - 280px); 
+    min-height: 100vh;
+    color: #ECDFCC;
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 35px;
+}
+
+.header-title h1 {
+    font-size: 36px; 
+    font-weight: 600;
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+    font-family: "Kdam Thmor";
+}
+
+.header-title p {
+    color: #333;
+    font-size: 25px; 
+    font-weight: 300;
+}
+
+.header-actions {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.search-box {
+    position: relative;
+}
+
+.search-box input {
+    padding: 14px 45px 14px 20px; 
+    border-radius: 30px;
+    border: none;
+    outline: #ECDFFC;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    width: 320px; 
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s ease;
+}
+
+.search-box input:focus {
+    background-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.search-box i {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaaaaa;
+    font-size: 18px; 
+}
+
+.add-product-btn {
+    padding: 14px 24px; 
+    background-color: #e6d8c3;
+    color: #000000;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 16px; 
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.add-product-btn:hover {
+    background-color: #d6c8b3;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Stats Cards */
+.stats-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+    margin-bottom: 35px;
+}
+
+.stat-card {
+    background-color: #1a1a1a;
+    border-radius: 12px;
+    padding: 28px; 
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    background-color: #303030;
+}
+
+.stat-card-icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    font-size: 22px; 
+}
+
+.stat-card-icon.dollar {
+    background-color: rgba(76, 175, 80, 0.2);
+    color: green;
+}
+
+.stat-card-icon.orders {
+    background-color: rgba(255, 213, 79, 0.2);
+    color: #ffd54f;
+}
+
+.stat-card-icon.customers {
+    background-color: rgba(33, 150, 243, 0.2);
+    color: #2196f3;
+    
+}
+
+.stat-card-icon.average {
+    background-color: rgba(244, 67, 54, 0.2);
+    color: #f44336;
+}
+
+.stat-card-title {
+    font-size: 30px; 
+    color: #ECDFCC;
+    margin-bottom: 15px;
+    font-weight: 500;
+    font-family: "Kdam Thmor";
+}
+
+.stat-card-value {
+    font-size: 30px; 
+    font-weight: 500;
+    margin-bottom: 15px;
+    letter-spacing: 0.5px;
+}
+
+.stat-change {
+    font-size: 16px; 
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+}
+
+.stat-change.up {
+    color: #4caf50;
+}
+
+.stat-change.down {
+    color: #f44336;
+}
+
+/* Products Section */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 25px;
+    margin-bottom: 35px;
+}
+
+.products-container, .seasonal-container {
+    background-color:#1a1a1a;
+    border-radius: 12px;
+    padding: 28px; 
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.section-title {
+    font-size: 30px; 
+    margin-bottom: 10px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.section-subtitle {
+    font-size: 23px; 
+    color: #333;
+    margin-bottom: 25px;
+    font-weight: 400;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+}
+
+.product-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.product-item:last-child {
+    border-bottom: none;
+}
+
+.product-info h4 {
+    font-size: 30px; 
+    margin-bottom: 10px;
+    font-weight: 450;
+}
+
+.product-info p {
+    font-size: 20px; 
+    color: #aaaaaa;
+    font-weight: 300;
+}
+
+.product-price {
+    text-align: right;
+}
+
+.product-price h4 {
+    font-size: 30px; /* Larger price */
+    color: #ffffff;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.product-price p {
+    font-size: 16px;
+    color: #aaaaaa;
+    font-weight: 300;
+}
+
+.view-all-btn {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 20px; 
+    width: 100%;
+    text-align: center;
+    margin-top: 25px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 20px; 
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s ease;
+}
+
+.view-all-btn:hover {
+    background-color: #ECDFCC;
+    color: #000000;
+    border-left: #e6d8c3;
+    padding-left: 21px;
+}
+
+/* Seasonal Section */
+.seasonal-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0; 
+    border-bottom: 1px solid var(--border-color);
+}
+
+.seasonal-item:last-child {
+    border-bottom: none;
+}
+
+.season-name {
+    font-size: 25px; 
+    font-weight: 500;
+}
+
+.season-percentage {
+    font-size: 22px; 
+    font-weight: 600;
+    color: #ffffff;
+}
+
+/* Recent Orders */
+.recent-orders {
+    margin-top: 35px;
+}
+
+.order-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px; 
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.order-item:last-child {
+    margin-bottom: 0;
+}
+
+.order-info h4 {
+    font-size: 18px; 
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.order-info p {
+    font-size: 18px; 
+    color: #aaaaaa;
+    font-weight: 500;
+}
+
+.order-status {
+    padding: 8px 18px; 
+    border-radius: 30px;
+    font-size: 15px; 
+    font-weight: 500;
+}
+
+.order-status.pending {
+    background-color: #CCCCCC;
+    color: #FFA500;
+}
+
+.order-status.completed {
+    background-color: #93E9BE;
+    color: #209D5E;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 25px 0;
+    color: #ECDFCC;
+    font-size: 16px; 
+    font-weight: 300;
+}

@@ -1,0 +1,151 @@
+@charset "UTF-8";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%;
+    font-family: 'Georgia', serif;
+    background-color: #000;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+/* LEFT PANEL */
+.left-panel {
+    flex: 1;
+    background-color: #000000;
+    color: #ECDFCC;
+    padding: 60px 40px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 30px;
+}
+
+.left-panel h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+    text-align: center;
+    width: 90%;
+    line-height: 1.4;
+}
+
+.left-panel p {
+    font-size: 22px;
+    line-height: 1.8;
+    margin-bottom: 30px;
+    width: 90%;
+    text-align: center;
+}
+
+.left-panel .login-form {
+    width: 90%;
+    max-width: none;
+}
+
+.left-panel input {
+    width: 100%;
+    padding: 18px;
+    margin-bottom: 30px;
+    border: 1px solid #333;
+    background-color: transparent;
+    color: #ECDFCC;
+    font-size: 20px;
+    height: auto;
+    border-radius: 4px;
+}
+
+.left-panel .forgot {
+    font-size: 20px;
+    color: #ccc;
+    text-decoration: none;
+    margin-bottom: 35px;
+    display: block;
+    text-align: center;
+}
+
+.left-panel button {
+    width: 100%;
+    padding: 20px;
+    background-color: #ECDFCC;
+    color: #000;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 20px;
+    border-radius: 4px;
+    margin-top: 15px;
+}
+
+.left-panel button:hover {
+    background-color: #66615E;
+}
+
+/* Register Text & Link */
+.register-text {
+    font-size: 16px;
+    color: #ECDFCC;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/*error message*/
+.error-message{
+	color: red;
+	margin-bottom: 16px;
+	text-align:center
+}
+
+.register-text .register-link {
+    color: #F5DEB3;
+    text-decoration: underline;
+    margin-left: 5px;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.register-text .register-link:hover {
+    color: #FFD700;
+}
+
+/* RIGHT PANEL */
+.right-panel {
+    flex: 1;
+    position: relative;
+}
+
+.slogan {
+    position: relative;
+    z-index: 2;
+    font-size: 36px;
+    font-weight: bold;
+    color: #ECDFCC; 
+    text-align: center;
+    margin-top: 40px;
+    padding: 10px 20px;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+    max-width: 90%;
+}
+
+/* IMAGE */
+.image-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    opacity: 0.8;
+    z-index: 1;
+}
+
+

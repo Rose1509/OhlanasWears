@@ -1,0 +1,122 @@
+@charset "UTF-8";
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Georgia', serif;
+    line-height: 1.6;
+}
+
+/* Header Section */
+.header {
+    background-color: #212121;
+    text-align: center;
+    padding: 40px 20px;
+    color: #CCCCCC;
+}
+
+.header h1 {
+    font-size: 3.5rem;
+    margin-bottom: 10px;
+    font-weight: normal;
+    color: #C9C29F;
+}
+
+.header p {
+    max-width: 550px;
+    margin: 0 auto;
+    font-size: 1.4rem;    
+}
+
+/* Header Section */
+.description {
+    background-color: #212121;
+    text-align: center;
+    padding: 40px 20px;
+    color: #CCCCCC;
+	position: relative; 
+    top: -10%;
+	   
+}
+
+
+.description h2 {
+    font-size: 2.9rem;
+    margin-bottom: 10px;
+    font-weight: normal;
+    color: #C9C29F;
+}
+
+.description p {
+    max-width: 2000px;
+    margin: 0 auto;
+    font-size: 1.4rem;    
+}
+
+.values-section {
+	padding: 50px 20px;
+    display: flex;
+    justify-content: space-around;
+    background-color: #202020;
+}
+.values-section div {
+    width: 40%;
+}
+
+.values-section h3 {
+	font-size: 60px;
+	font-family: 'Ledger';
+	color: #C9C29F; 
+	
+}
+
+
+.values-section p {
+	font-size: 30px;
+	color: #CCCCCC;
+}
+
+.values-section .highlight {
+	color: #ccc;
+    font-weight: bold;
+}
+
+.values-section .comfort {
+	color: #BFAE99;
+}
+        
+.values-section .versatility {
+    color: #BFAE99; 
+}
+        
+.values-section .confidence {
+    color: #BFAE99; 
+}
+
+.values-section img {
+	width: 650px;
+    height: 700px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+        
+.button {
+    display: inline-block;
+    padding: 20px 30px;
+    background-color: #000;
+    color: #fff;
+    text-decoration: 'Konkhmer Sleokchher';
+    border-radius: 5px;
+	margin-top: 20px;
+}
+
+.button:hover {
+    background-color: #C9C29F;
+    color: #000;
+    transform: scale(1.05);
+    transition: all 0.3s ease;
+}
+

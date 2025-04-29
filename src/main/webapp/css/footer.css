@@ -1,0 +1,101 @@
+@charset "UTF-8";
+
+
+/* Footer Styles */
+footer {
+    background: linear-gradient(135deg, #3B3B3B 0%, #3B3B3B 100%);
+    color: #ECDFCC;
+    padding: 50px 20px;
+    text-align: center;
+    font-family: 'Georgia';
+    border-top: 1px solid #444;
+}
+
+.footer-logo h4 {
+    font-family: 'Georgia';
+    font-size: 40px;
+    color: #ECDFCC;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 30px;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 200px;
+    margin: 15px 0;
+}
+
+.footer-section h4 {
+    font-size: 25px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+.footer-link {
+    color: #ECDFCC;
+    font-family: 'Georgia';
+    transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+    color: #804000;
+    text-decoration: underline;
+}
+
+.footer-section p {
+    font-size: 20px;
+    line-height: 1.6;
+    margin: 5px 0;
+    color: #d3d3d3;
+}
+
+.social-follow {
+    color: #ECDFCC;
+    font-family: 'Georgia';
+    font-size: 25px;
+}
+
+.social-follow p{
+    margin-top: -5px;
+    font-size: 25px;
+    font-family: 'Georgia';
+    color: #ECDFCC;
+}
+	
+
+.ic-icons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.ic-icons a {
+    color: #ECDFCC;
+    font-size: 28px;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.ic-icons a:hover {
+    color: #804000;
+    transform: scale(1.2);
+}
+
+.copyright {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 0.5px solid #444;
+    font-size: 20px;
+    color: #b0b0b0;
+    font-family: 'Georgia';
+}
