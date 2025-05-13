@@ -2,7 +2,6 @@ package com.OhlanasWears.controller;
 
 import java.io.IOException;
 
-
 import com.OhlanasWears.model.CustomerModel;
 import com.OhlanasWears.service.RegisterService;
 import com.OhlanasWears.util.PasswordUtil;
@@ -27,64 +26,49 @@ public class RegisterController extends HttpServlet {
     private final RegisterService registerService = new RegisterService();
     private RegisterService service;
 
-<<<<<<< HEAD
-=======
     /**
      * Default constructor initializing the registration service.
      */
->>>>>>> 8fb0f1155fc39871f8d06c2a17c8de7705c0130a
     public RegisterController() {
         super();
         this.setService(new RegisterService());
     }
 
-<<<<<<< HEAD
-=======
     /**
      * Handles GET requests to display the registration form.
      *
-     * @param req  the HttpServletRequest object containing client request data.
-     * @param resp the HttpServletResponse object used to send the response.
+     * @param req  HttpServletRequest object that contains the request the client made to the servlet.
+     * @param resp HttpServletResponse object that contains the response the servlet returns to the client.
      * @throws ServletException if servlet-specific error occurs.
      * @throws IOException      if an I/O error occurs during forwarding.
      */
->>>>>>> 8fb0f1155fc39871f8d06c2a17c8de7705c0130a
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(req, resp);
     }
 
-<<<<<<< HEAD
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        try {
-=======
     /**
      * Handles POST requests for registering a new user.
      *
-     * @param req  the HttpServletRequest object containing form data.
-     * @param resp the HttpServletResponse object used to send a redirect or forward response.
+     * @param req  HttpServletRequest object that contains the request the client made to the servlet.
+     * @param resp HttpServletResponse object that contains the response the servlet returns to the client.
      * @throws ServletException if servlet-specific error occurs.
      * @throws IOException      if an I/O error occurs.
      */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-        	
             String validationMessage = validateRegistrationForm(req);
             if (validationMessage != null) {
                 handleError(req, resp, validationMessage);
                 return;
             }
->>>>>>> 8fb0f1155fc39871f8d06c2a17c8de7705c0130a
+
             CustomerModel customerModel = extractRegisterModel(req);
             System.out.println("Extracted Customer");
 
             Boolean isAdded = registerService.registerCustomer(customerModel);
             System.out.println("User registered");
-<<<<<<< HEAD
-=======
-            
 
             if (isAdded == null) {
                 handleError(req, resp, "Our server is under maintenance. Please try again later!");
@@ -98,15 +82,13 @@ public class RegisterController extends HttpServlet {
             e.printStackTrace(); // Log the exception
         }
     }
-    
+
     /**
      * Validates the registration form for user input.
      *
-     * @param req The HttpServletRequest object that contains the request from the client.
-     *            It is used to retrieve the form parameters.
-     * @return A validation message if any input is invalid, or null if all validations pass.
-     */    
-    
+     * @param req HttpServletRequest containing form data submitted by the client.
+     * @return A validation error message if input is invalid; otherwise, returns null.
+     */
     private String validateRegistrationForm(HttpServletRequest req) {
         String fullName = req.getParameter("Customer_Name");
         String username = req.getParameter("User_Name");
@@ -115,7 +97,6 @@ public class RegisterController extends HttpServlet {
         String password = req.getParameter("Password");
         String confirmPassword = req.getParameter("confirm_password");
 
-        // Check for null or empty fields
         if (ValidationUtil.isNullOrEmpty(fullName))
             return "Full name is required.";
         if (ValidationUtil.isNullOrEmpty(username))
@@ -129,7 +110,6 @@ public class RegisterController extends HttpServlet {
         if (ValidationUtil.isNullOrEmpty(confirmPassword))
             return "Please confirm your password.";
 
-        // Validate formats
         if (!ValidationUtil.isAlphanumericStartingWithLetter(username))
             return "Username must start with a letter and contain only letters and numbers.";
         if (!ValidationUtil.isValidEmail(email))
@@ -141,48 +121,28 @@ public class RegisterController extends HttpServlet {
         if (!ValidationUtil.doPasswordsMatch(password, confirmPassword))
             return "Passwords do not match.";
 
-        return null; // All validations passed
-    }
->>>>>>> 8fb0f1155fc39871f8d06c2a17c8de7705c0130a
-
-            if (isAdded == null) {
-                handleError(req, resp, "Our server is under maintenance. Please try again later!");
-            } else if (isAdded) {
-                handleSuccess(req, resp, "Your account is successfully created!", "/home");
-            } else {
-                handleError(req, resp, "Could not register your account. Please try again later!");
-            }
-        } catch (Exception e) {
-            handleError(req, resp, "An unexpected error occurred. Please try again later!");
-            e.printStackTrace(); // Log the exception
-        }
+        return null;
     }
 
-<<<<<<< HEAD
-=======
     /**
-     * Extracts and validates the registration form data and creates a CustomerModel.
-     * Encrypts the password before returning the model.
+     * Extracts and processes registration form data to create a CustomerModel.
      *
-     * @param req the HttpServletRequest containing user-submitted form data.
-     * @return a CustomerModel object populated with the form data.
-     * @throws Exception if password and confirmation do not match or are invalid.
+     * @param req HttpServletRequest containing form data submitted by the client.
+     * @return CustomerModel object populated with the validated and encrypted form data.
+     * @throws Exception if passwords do not match or are null.
      */
->>>>>>> 8fb0f1155fc39871f8d06c2a17c8de7705c0130a
     private CustomerModel extractRegisterModel(HttpServletRequest req) throws Exception {
         System.out.println("Reached here 1");
+
         String fullName = req.getParameter("Customer_Name");
         String username = req.getParameter("User_Name");
         String email = req.getParameter("email");
         String phoneNumber = req.getParameter("Phone_Number");
+
         System.out.println("Reached here 2");
 
         String password = req.getParameter("Password");
-<<<<<<< HEAD
-        String confirmPassword = req.getParameter("confirm-password");
-=======
         String confirmPassword = req.getParameter("confirm_password");
->>>>>>> 8fb0f1155fc39871f8d06c2a17c8de7705c0130a
 
         System.out.println(password);
         System.out.println(confirmPassword);
@@ -191,27 +151,17 @@ public class RegisterController extends HttpServlet {
             throw new Exception("Passwords do not match or are invalid.");
         }
 
-        // Encrypt password before storing
         password = PasswordUtil.encrypt(username, password);
-
         return new CustomerModel(fullName, username, email, phoneNumber, password);
     }
 
-<<<<<<< HEAD
-    private void handleSuccess(HttpServletRequest req, HttpServletResponse resp, String message, String redirectPage)
-            throws ServletException, IOException {
-        req.getSession().setAttribute("success", message); // using session attribute for redirect
-        resp.sendRedirect(req.getContextPath() + redirectPage); // redirect to home page
-    }
-
-=======
     /**
      * Handles successful registration by setting a success message and redirecting.
      *
-     * @param req          the HttpServletRequest object.
-     * @param resp         the HttpServletResponse object.
-     * @param message      the success message to display.
-     * @param redirectPage the path to redirect the user to.
+     * @param req          HttpServletRequest object for accessing session and context.
+     * @param resp         HttpServletResponse object used to redirect.
+     * @param message      Success message to be stored in the session.
+     * @param redirectPage URL path to which the user should be redirected.
      * @throws ServletException if servlet-specific error occurs.
      * @throws IOException      if an I/O error occurs.
      */
@@ -222,41 +172,34 @@ public class RegisterController extends HttpServlet {
     }
 
     /**
-     * Handles registration failure by setting an error message and forwarding back to the form.
+     * Handles registration errors by setting an error message and forwarding to the form page.
      *
-     * @param req     the HttpServletRequest object.
-     * @param resp    the HttpServletResponse object.
-     * @param message the error message to display.
+     * @param req     HttpServletRequest object for storing error attributes.
+     * @param resp    HttpServletResponse object for forwarding the request.
+     * @param message Error message to be displayed on the registration page.
      * @throws ServletException if servlet-specific error occurs.
      * @throws IOException      if an I/O error occurs.
      */
->>>>>>> 8fb0f1155fc39871f8d06c2a17c8de7705c0130a
     private void handleError(HttpServletRequest req, HttpServletResponse resp, String message)
             throws ServletException, IOException {
         req.setAttribute("error", message);
         req.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(req, resp);
     }
 
-<<<<<<< HEAD
-=======
     /**
-     * Getter for the RegisterService instance (used for testing or overriding).
+     * Getter for the RegisterService instance.
      *
-     * @return the RegisterService instance.
+     * @return RegisterService instance used for registration logic.
      */
->>>>>>> 8fb0f1155fc39871f8d06c2a17c8de7705c0130a
     public RegisterService getService() {
         return service;
     }
 
-<<<<<<< HEAD
-=======
     /**
      * Setter for the RegisterService instance.
      *
-     * @param service the RegisterService instance to set.
+     * @param service RegisterService instance to replace the current one (for testing or override).
      */
->>>>>>> 8fb0f1155fc39871f8d06c2a17c8de7705c0130a
     public void setService(RegisterService service) {
         this.service = service;
     }
