@@ -34,9 +34,9 @@
         <div>
             <img src = "${pageContext.request.contextPath}/resources/images/system/aboutusimg.png"  alt="Portrait">
             <h3>What We Stand For</h3>
-            <p><span class="highlight comfort">Comfort:</span><br>We believe in easygoing styles that feel great all day long.</p>
-            <p><span class="highlight versatility">Versatility:</span><br>Our pieces are designed to adapt to your changing wardrobe needs.</p>
-            <p><span class="highlight confidence">Confidence:</span><br>We celebrate individuality and self-expression through fashion.</p>
+            <p><a class="highlight comfort">Comfort:</a><br>We believe in easygoing styles that feel great all day long.</p>
+            <p><a class="highlight versatility">Versatility:</a><br>Our pieces are designed to adapt to your changing wardrobe needs.</p>
+            <p><a class="highlight confidence">Confidence:</a><br>We celebrate individuality and self-expression through fashion.</p>
         </div>
         <div>
             <h3>Our Story</h3>

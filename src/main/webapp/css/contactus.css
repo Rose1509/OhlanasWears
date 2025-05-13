@@ -22,7 +22,7 @@ body {
 /* Left side model image */
 .model-image {
     width: 50%;
-    height: 1100px;
+    height: 950px;
     overflow: hidden;
 }
 
@@ -93,6 +93,30 @@ body {
 
 .submit-btn:hover {
     background-color: #444;
+}
+
+/* Pop-up Box Styles */
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #222;
+    color: #ECDFCC;
+    padding: 20px 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+    font-size: 18px;
+    font-family: 'Georgia', serif;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 1000;
+}
+
+.popup.show {
+    opacity: 1;
+    visibility: visible;
 }
 
 /* Contact Info Styles */
@@ -182,6 +206,7 @@ body {
     color: #000;
     transform: scale(1.1);
 }
+
 
 /* Map Section Styles */
 .map-section {

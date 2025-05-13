@@ -36,6 +36,7 @@ body, html {
     text-align: center;
     width: 90%;
     line-height: 1.4;
+    color: #adac93;        
 }
 
 .left-panel p {
@@ -65,7 +66,7 @@ body, html {
 
 .left-panel .forgot {
     font-size: 20px;
-    color: #ccc;
+    color:#848481;
     text-decoration: none;
     margin-bottom: 35px;
     display: block;
@@ -89,6 +90,23 @@ body, html {
 .left-panel button:hover {
     background-color: #66615E;
 }
+
+.toast {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #28a745; /* green */
+    color: white;
+    padding: 25px 40px;           
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    font-size: 20px;              
+    animation: fadein 0.5s, fadeout 0.5s 3.5s;
+    z-index: 1000;
+}
+
+
+
 
 /* Register Text & Link */
 .register-text {

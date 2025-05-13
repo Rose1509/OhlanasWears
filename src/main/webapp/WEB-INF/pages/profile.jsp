@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,54 +9,68 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>
-    <jsp:include page="header.jsp"/>
-
+    <jsp:include page="header.jsp" />
     <div class="container">
         <aside class="sidebar">
-            <nav>
-                <a href="#basic-info" class="active" aria-current="page">
-                    <i class="fas fa-user"></i> Basic Information
-                </a>
-                <a href="#password"><i class="fas fa-shopping-cart"></i> Order History</a>
-                <a href="#preferences"><i class="fas fa-cog"></i> Preferences</a>
-                <a href="#support"><i class="fas fa-question-circle"></i> Support</a>
-            </nav>
+            <h1> My Profile</h1>
+            <div class="profile-pic">
+                <i class="fas fa-user"></i>
+            </div>
+            <!-- Displaying full name from the request -->
+            <div class="profile-name">${fullName}</div>
         </aside>
+        
         <main class="main-content">
-            <form id="profile-form" class="profile-section" action="${pageContext.request.contextPath}/updateProfile" method="POST">
-                <div class="form-group">
-                    <label for="full-name">First Name</label>
-                    <input type="text" id="full-name" name="fullName" value="">
+            <form id="profile-form" class="profile-section" method="POST">
+                <!-- Full Name -->
+                <div class="form-row">
+                    <div class="form-group half-width">
+                        <label for="full-name">Full Name</label>
+                        <!-- Populating full name -->
+						<input type="text" id="fullname" name="fullname" value="${fullName}" required>
+                    </div>
+                    <div class="form-group half-width">
+                        <label for="Password">Password</label>
+                        <!-- Masking password for security -->
+						<input type="password" id="password" name="password" value="${maskedPassword}" required>
+                    </div>
                 </div>
-                
-                <div class="form-group">
-                    <label for="full-name">Last Name</label>
-                    <input type="text" id="last-name" name="LastName" value=" ">
-                </div>
-                                
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" value="" >
-                    <div class="note">
-                        This is your primary email address and will be used to send notifications.
+
+                <!-- Username & Email Address -->
+                <div class="form-row">
+                    <div class="form-group half-width">
+                        <label for="username">User Name</label>
+                        <!-- Populating username -->
+                        <input type="text" id="username" name="username" value="${username}" required>
+                    </div>
+                    <div class="form-group half-width">
+                        <label for="email">Email Address</label>
+                        <!-- Populating email -->
+                        <input type="email" id="email" name="email" value="${email}" required>
+                        <div class="note">
+                            This is your primary email address, and will be used to send notifications.
+                        </div>
                     </div>
                 </div>
                 
+                <!-- Phone Number -->
                 <div class="form-group">
                     <label for="phone">Phone Number</label>
-                    <input type="tel" id="phone" name="phone" value="" pattern="\+?[1-9]\d{1,14}" title="Enter a valid phone number">
+                    <!-- Populating phone -->
+					<input type="tel" id="phone" name="phone" value="${phone}">
                 </div>
                 
+                <!-- Location -->
                 <div class="form-group">
-                    <label for="billing-address">Billing Address</label>
-                    <textarea id="billing-address" name="billingAddress" rows="4" ></textarea>
+                    <label for="location">Location</label>
+                    <!-- Populating location -->
+                    <input type="text" id="location" name="location" value="${location}">
                 </div>
                 
                 <button type="submit" class="save-btn">Save Changes</button>
             </form>
         </main>
     </div>
-    <jsp:include page="footer.jsp"/>
-
+    <jsp:include page="footer.jsp" />    
 </body>
 </html>

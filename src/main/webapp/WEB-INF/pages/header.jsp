@@ -1,4 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="jakarta.servlet.http.HttpSession"%>
+<%@ page import="jakarta.servlet.http.HttpServletRequest"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +20,7 @@
     <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="logo">
-            <a href="index.jsp">Oh Lana's Wears</a>
+            <a href="home">Oh Lana's Wears</a>
         </div>
 
         <ul class="nav-links">
@@ -24,6 +28,7 @@
             <li><a href="collection">COLLECTION</a></li>
             <li><a href="contactus">CONTACT US</a></li>
             <li><a href="aboutus">ABOUT US</a></li>
+            <li><a href="admindashboard">DASHBOARD</a></li>            
         </ul>
 
         <div class="nav-icons">
