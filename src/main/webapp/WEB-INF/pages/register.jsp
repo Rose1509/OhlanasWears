@@ -40,7 +40,7 @@
 			        <input type="password" id="Password" name="Password" placeholder="CREATE A PASSWORD" required>
 			    </div>
 			    <div class="input-group">
-			        <input type="password" id="confirm-password" name="confirm-password" placeholder="CONFIRM PASSWORD" required>
+			        <input type="password" id="confirm-password" name="confirm_password" placeholder="CONFIRM PASSWORD" required>
 			    </div>
 			    <button type="submit">Register Now</button>
 			</form>

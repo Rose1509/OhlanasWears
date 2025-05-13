@@ -10,70 +10,80 @@ import com.OhlanasWears.model.CustomerModel;
 import com.OhlanasWears.util.PasswordUtil;
 
 /**
- * Service class for handling login operations. Connects to the database,
- * verifies user credentials, and returns login status.
+ * Service class for handling login operations by verifying the 
+ * username and password of the customer from the database.
+ *
+ * LMU ID: 23048677  
+ * NAME: Rose Khatiwada
  */
 public class LoginService {
 
-	private Connection dbConn;
-	private boolean isConnectionError = false;
+    private Connection dbConn;
+    private boolean isConnectionError = false;
 
-	/**
-	 * Constructor initializes the database connection. Sets the connection error
-	 * flag if the connection fails.
-	 */
-	public LoginService() {
-		try {
-			dbConn = DbConfig.getDbConnection();
-		} catch (SQLException | ClassNotFoundException ex) {
-			ex.printStackTrace();
-			isConnectionError = true;
-		}
-	}
+    /**
+     * Constructor that attempts to establish a connection to the database.
+     * If the connection fails, a flag is set to indicate a connection error.
+     */
+    public LoginService() {
+        try {
+            dbConn = DbConfig.getDbConnection();
+        } catch (SQLException | ClassNotFoundException ex) {
+            ex.printStackTrace();
+            isConnectionError = true;
+        }
+    }
 
-	/**
-	 * Validates the user credentials against the database records.
-	 *
-	 * @param studentModel the StudentModel object containing user credentials
-	 * @return true if the user credentials are valid, false otherwise; null if a
-	 *         connection error occurs
-	 */
-	public Boolean loginUser(CustomerModel customerModel) {
-		if (isConnectionError) {
-			System.out.println("Connection Error!");
-			return null;
-		}
+    /**
+     * Authenticates the customer by verifying the username and password.
+     *
+     * @param customerModel A model object containing login credentials.
+     * @return true if login is successful, false if credentials are invalid, 
+     *         or null if there is a connection or query error.
+     */
+    public Boolean loginUser(CustomerModel customerModel) {
+        if (isConnectionError) {
+            System.out.println("Connection Error!");
+            return null;
+        }
 
-		String query = "SELECT username, password FROM student WHERE username = ?";
-		try (PreparedStatement stmt = dbConn.prepareStatement(query)) {
-			stmt.setString(1, customerModel.getUserName());
-			ResultSet result = stmt.executeQuery();
+        String query = "SELECT User_Name, Password FROM customer WHERE LOWER(User_Name) = LOWER(?)";
 
-			if (result.next()) {
-				return validatePassword(result, customerModel);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return null;
-		}
+        try (PreparedStatement stmt = dbConn.prepareStatement(query)) {
+            stmt.setString(1, customerModel.getUserName());
+            ResultSet result = stmt.executeQuery();
 
-		return false;
-	}
+            if (result.next()) {
+                return validatePassword(result, customerModel);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
 
-	/**
-	 * Validates the password retrieved from the database.
-	 *
-	 * @param result       the ResultSet containing the username and password from
-	 *                     the database
-	 * @param studentModel the StudentModel object containing user credentials
-	 * @return true if the passwords match, false otherwise
-	 * @throws SQLException if a database access error occurs
-	 */
-	private boolean validatePassword(ResultSet result, CustomerModel customerModel) throws SQLException {
-		String dbUsername = result.getString("username");
-		String dbPassword = result.getString("password");
+        return false;
+    }
 
-		return dbUsername.equals(customerModel.getUserName())
-				&& PasswordUtil.decrypt(dbPassword, dbUsername).equals(customerModel.getPassword());
-	}
+    /**
+     * Decrypts the stored password and compares it with the user input.
+     *
+     * @param result        ResultSet object containing the stored username and encrypted password.
+     * @param customerModel The input model containing the login credentials.
+     * @return true if both username and password match, false otherwise.
+     * @throws SQLException if there is an error accessing the ResultSet.
+     */
+    private boolean validatePassword(ResultSet result, CustomerModel customerModel) throws SQLException {
+        String dbUsername = result.getString("User_Name");
+        String dbPassword = result.getString("Password");
+
+        try {
+            String decryptedPassword = PasswordUtil.decrypt(dbPassword, dbUsername);
+            return dbUsername.equalsIgnoreCase(customerModel.getUserName()) &&
+                   decryptedPassword.equals(customerModel.getPassword());
+        } catch (Exception e) {
+            System.out.println("Password decryption failed.");
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

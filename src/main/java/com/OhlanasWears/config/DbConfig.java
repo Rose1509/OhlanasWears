@@ -5,6 +5,12 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
+ * LMU ID: 23048677
+
+ * NAME: Rose Khatiwada
+ */
+
+/**
  * DbConfig is a configuration class for managing database connections. It
  * handles the connection to a MySQL database using JDBC.
  */
