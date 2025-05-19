@@ -88,7 +88,6 @@ public class AdminDashboardService {
     public List<Product> getTopSellingProducts() {
         List<Product> topProducts = new ArrayList<>();
         // Assuming you have a sales or orders table to track product sales
-        // If not, this query would need to be adjusted based on your database structure
         String query = "SELECT c.Name, c.Stock, c.Price, COALESCE(SUM(o.Quantity), 0) as Sales " +
                        "FROM clothes c " +
                        "LEFT JOIN orders o ON c.Clothes_ID = o.Clothes_ID " +
@@ -108,7 +107,6 @@ public class AdminDashboardService {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            // Fallback with dummy data if query fails or tables don't exist
             if (topProducts.isEmpty()) {
                 addDummyProducts(topProducts);
             }
@@ -150,7 +148,6 @@ public class AdminDashboardService {
     // Seasonal Distribution
     public Map<String, Integer> getSeasonalDistribution() {
         Map<String, Integer> seasonalDistribution = new HashMap<>();
-        // Assuming you have a Season column in your clothes table
         String query = "SELECT Season, COUNT(*) as Count FROM clothes GROUP BY Season";
         
         try (Statement stmt = connection.createStatement(); 
@@ -176,7 +173,6 @@ public class AdminDashboardService {
     // Recent Orders
     public List<Order> getRecentOrders() {
         List<Order> recentOrders = new ArrayList<>();
-        // Assuming you have an orders table with these columns
         String query = "SELECT o.Order_ID, c.Name, o.Total_Price, o.Status " +
                        "FROM orders o " +
                        "JOIN clothes c ON o.Clothes_ID = c.Clothes_ID " +
@@ -195,7 +191,6 @@ public class AdminDashboardService {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            // Fallback with dummy data
             if (recentOrders.isEmpty()) {
                 Order o1 = new Order();
                 o1.setProductName("Off-white Silk Shirt");
