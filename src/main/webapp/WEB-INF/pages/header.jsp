@@ -32,8 +32,17 @@
         </ul>
 
         <div class="nav-icons">
-            <a href="search.jsp" class="search-icon"><i class="fas fa-search"></i></a>
+            <a href="#" class="search-icon"><i class="fas fa-search"></i></a>
             <a href="profile" class="user-icon"><i class="fas fa-user"></i></a>
-            <a href="login" class="sign-out-icon"><i class="fas fa-sign-out-alt"></i></a>
+            <a href="login" class="sign-out-icon" onclick="return confirmLogout();"><i class="fas fa-sign-out-alt"></i></a>
         </div>
     </nav>
+
+    <!-- JavaScript for logout confirmation -->
+    <script>
+        function confirmLogout() {
+            return confirm("Are you sure you want to log out?");
+        }
+    </script>
+</body>
+</html>

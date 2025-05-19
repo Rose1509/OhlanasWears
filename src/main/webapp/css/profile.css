@@ -78,14 +78,22 @@ body {
 }
 
 .form-row {
+	
     display: flex;
     gap: 50px;
     justify-content: space-between;
 }
 
+.form-group.full-width {
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+
 .form-group.half-width {
     flex: 1;
 }
+
 
 
 .form-group label {
@@ -107,6 +115,13 @@ body {
     background-color: transparent;
     color: #ECDFCC;
 }
+
+.form-group input:focus {
+    outline: none;
+    border-color: #B88746;
+    box-shadow: 0 0 0 3px rgba(184, 135, 70, 0.2);
+}
+
 
 .note {
     font-size: 14px;

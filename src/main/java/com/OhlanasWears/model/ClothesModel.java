@@ -10,6 +10,7 @@ public class ClothesModel {
     private String color;
     private int stock;
     private double price;
+    private String image;
 
     /**
      * Default constructor.
@@ -27,12 +28,13 @@ public class ClothesModel {
      * @param stock       the available stock quantity
      * @param price       the price of the clothing item
      */
-    public ClothesModel(int code, String clothesName, String color, int stock, double price) {
+    public ClothesModel(int code, String clothesName, String color, int stock, double price, String image) {
         this.code = code;
         this.clothesName = clothesName;
         this.color = color;
         this.stock = stock;
         this.price = price;
+        this.image = image;
     }
 
     /**
@@ -104,4 +106,12 @@ public class ClothesModel {
     public void setCode(int code) {
         this.code = code;
     }
+    
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}    
 }

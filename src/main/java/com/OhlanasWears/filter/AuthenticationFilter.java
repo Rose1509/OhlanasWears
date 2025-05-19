@@ -133,11 +133,5 @@ public class AuthenticationFilter implements Filter {
         }
     }
 
-    // Uncomment this if you need to clean up resources when the filter is destroyed
-    /*
-    @Override
-    public void destroy() {
-        // Cleanup logic, if required
-    }
-    */
+  
 }

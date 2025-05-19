@@ -47,12 +47,13 @@ public class ProductService {
             return null;
         }
 
-        String insertQuery = "INSERT INTO clothes (ClothesName, Color, Stock, Price) VALUES (?, ?, ?, ?)";
+        String insertQuery = "INSERT INTO clothes (ClothesName, Color, Stock, Price, Image) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement insertStmt = connection.prepareStatement(insertQuery)) {
             insertStmt.setString(1, clothesModel.getClothesName());
             insertStmt.setString(2, clothesModel.getColor());
             insertStmt.setInt(3, clothesModel.getStock());
             insertStmt.setDouble(4, clothesModel.getPrice());
+            insertStmt.setString(5, clothesModel.getImage());
 
             int rowsAffected = insertStmt.executeUpdate();
             return rowsAffected > 0;
@@ -78,7 +79,8 @@ public class ProductService {
                         rs.getString("ClothesName"),
                         rs.getString("Color"),
                         rs.getInt("Stock"),
-                        rs.getDouble("Price")
+                        rs.getDouble("Price"),
+                        rs.getString("Image")                        
                 );
                 clothesList.add(model);
             }
@@ -88,6 +90,37 @@ public class ProductService {
         return clothesList;
     }
 
+    /**
+     * Searches for clothes by name (partial match).
+     * 
+     * @param clothesName the name or partial name to search for
+     * @return a list of ClothesModel objects matching the search criteria
+     */
+    public List<ClothesModel> searchClothesByName(String clothesName) {
+        List<ClothesModel> clothesList = new ArrayList<>();
+        String query = "SELECT * FROM clothes WHERE ClothesName LIKE ?";
+
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, "%" + clothesName + "%"); // Use % for partial matching
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                ClothesModel model = new ClothesModel(
+                        rs.getInt("clothes_id"),
+                        rs.getString("ClothesName"),
+                        rs.getString("Color"),
+                        rs.getInt("Stock"),
+                        rs.getDouble("Price"),
+                        rs.getString("Image")
+                );
+                clothesList.add(model);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return clothesList;
+    }
+    
     /**
      * Deletes a product (clothes) from the database based on its ID.
      * 

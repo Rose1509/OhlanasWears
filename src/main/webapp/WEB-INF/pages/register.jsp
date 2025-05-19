@@ -36,7 +36,7 @@
 			    <div class="input-group">
 			        <input type="tel" id="Phone_Number" name="Phone_Number" placeholder="PHONE NUMBER" required>
 			    </div>
-			    <div class="input-group">
+			    <div  class="input-group">
 			        <input type="password" id="Password" name="Password" placeholder="CREATE A PASSWORD" required>
 			    </div>
 			    <div class="input-group">

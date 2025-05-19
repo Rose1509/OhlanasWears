@@ -6,6 +6,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
 
 import java.io.IOException;
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
 import com.OhlanasWears.model.ClothesModel;
 import com.OhlanasWears.service.ProductService;
 import com.OhlanasWears.util.ValidationUtil;
+import com.OhlanasWears.util.ImageUtil;
 
 @WebServlet(
     asyncSupported = true,
@@ -27,28 +29,41 @@ public class ProductController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
     private ProductService service;
+	private final ImageUtil imageUtil = new ImageUtil();
+
 
     public ProductController() {
         super();
-        this.service = new ProductService();
+        service = new ProductService();
     }
 
     /**
-     * Handles HTTP GET requests.
+     * Handles HTTP GET requests for displaying products.  
+     * If a search query is provided, filters the products by name.  
+     * Otherwise, displays all products.
      *
-     * @param request  The HttpServletRequest object that contains the request the client has made.
-     * @param response The HttpServletResponse object that contains the response the servlet sends to the client.
-     * @throws ServletException If an error occurs while processing the request.
-     * @throws IOException      If an input or output error occurs during the request-response cycle.
+     * @param request  the {@link HttpServletRequest} containing the client's request, including optional search parameters.
+     * @param response the {@link HttpServletResponse} used to send the response back to the client.
+     * @throws ServletException if a servlet-specific error occurs while processing the request.
+     * @throws IOException      if an I/O error occurs during the request-response cycle.
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<ClothesModel> products = service.getAllClothes();
+        String searchQuery = request.getParameter("search");
+        List<ClothesModel> products;
+
+        if (searchQuery != null && !searchQuery.trim().isEmpty()) {
+            // Search for products by clothes name
+            products = service.searchClothesByName(searchQuery.trim());
+        } else {
+            // Get all products if no search query
+            products = service.getAllClothes();
+        }
+
         request.setAttribute("products", products);
         request.getRequestDispatcher("/WEB-INF/pages/product.jsp").forward(request, response);
     }
-
     /**
      * Handles HTTP POST requests.
      *
@@ -70,10 +85,12 @@ public class ProductController extends HttpServlet {
             }
 
         } catch (Exception e) {
-            handleError(request, response, "An unexpected error occurred.");
-            e.printStackTrace();
+            request.setAttribute("error", "An error occurred: " + e.getMessage());
+            e.printStackTrace(); // Will help you see which line failed
+            request.getRequestDispatcher("/WEB-INF/pages/product.jsp").forward(request, response);
         }
     }
+
 
     /**
      * Handles product deletion.
@@ -102,24 +119,37 @@ public class ProductController extends HttpServlet {
      * @throws IOException      If an input or output error occurs during the request-response cycle.
      */
     private void handleAddProduct(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String validationMessage = validateProductForm(request);
-        if (validationMessage != null) {
-            handleError(request, response, validationMessage);
-            return;
-        }
+    	        throws ServletException, IOException {
 
-        ClothesModel clothesModel = extractClothesModel(request);
-        Boolean isAdded = service.addProduct(clothesModel);
+    	    // Step 1: Validate the input form
+    	    String validationMessage = validateProductForm(request);
+    	    if (validationMessage != null) {
+    	        handleError(request, response, validationMessage);
+    	        return;
+    	    }
 
-        if (isAdded == null) {
-            handleError(request, response, "Server issue. Try again later.");
-        } else if (isAdded) {
-            handleSuccess(request, response, "Product added successfully!", "/WEB-INF/pages/product.jsp");
-        } else {
-            handleError(request, response, "Could not add the product.");
-        }
-    }
+    	    // Step 2: Upload the image
+    	    boolean imageUploaded = uploadImage(request);
+    	    if (!imageUploaded) {
+    	        handleError(request, response, "Image upload failed. Please try again.");
+    	        return;
+    	    }
+
+    	    // Step 3: Extract product data
+    	    ClothesModel clothesModel = extractClothesModel(request);
+
+    	    // Step 4: Save product to the database
+    	    Boolean isAdded = service.addProduct(clothesModel);
+
+    	    // Step 5: Handle response
+    	    if (isAdded == null) {
+    	        handleError(request, response, "Server issue. Try again later.");
+    	    } else if (isAdded) {
+    	        handleSuccess(request, response, "Product added successfully!", "/WEB-INF/pages/product.jsp");
+    	    } else {
+    	        handleError(request, response, "Could not add the product.");
+    	    }
+    	}
 
     /**
      * Validates the product form input.
@@ -167,17 +197,27 @@ public class ProductController extends HttpServlet {
      *
      * @param request The HttpServletRequest object that contains the request the client has made.
      * @return A ClothesModel object with data from the form.
+     * @throws ServletException 
+     * @throws IOException 
      */
-    private ClothesModel extractClothesModel(HttpServletRequest request) {
+    private ClothesModel extractClothesModel(HttpServletRequest request) throws IOException, ServletException {
         int code = 0;
         String clothesName = request.getParameter("clothesName");
         String color = request.getParameter("color");
         int stock = Integer.parseInt(request.getParameter("stock"));
         double price = Double.parseDouble(request.getParameter("price"));
+        
+		Part image = request.getPart("image");
+		String imageUrl = imageUtil.getImageNameFromPart(image);
 
-        return new ClothesModel(code, clothesName, color, stock, price);
+        return new ClothesModel(code, clothesName, color, stock, price, imageUrl);
     }
 
+    private boolean uploadImage(HttpServletRequest req) throws IOException, ServletException {
+        Part image = req.getPart("image");
+        return imageUtil.uploadImage(image, req.getServletContext().getRealPath("/"), "system");
+    }
+	
     /**
      * Handles successful operations.
      *
@@ -196,6 +236,7 @@ public class ProductController extends HttpServlet {
         request.getRequestDispatcher(redirectPage).forward(request, response);
     }
 
+    
     /**
      * Handles error messages.
      *

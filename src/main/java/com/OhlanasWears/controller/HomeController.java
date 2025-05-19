@@ -8,41 +8,52 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
+ * Controller to handle requests for the Home page of Oh-Lana’s Wears website.
+ *
+ * 
  * LMU ID: 23048677
  * NAME: Rose Khatiwada
+ * 
  */
 @WebServlet(
-		asyncSupported = true, 
-		urlPatterns = { 
-				"/home", 
-				"/index"
-		})
+    asyncSupported = true, 
+    urlPatterns = { 
+        "/home", 
+        "/index"
+    })
 public class HomeController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
+    private static final long serialVersionUID = 1L;
+
     /**
-     * @see HttpServlet#HttpServlet()
+     * Constructs a new HomeController servlet.
      */
     public HomeController() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/WEB-INF/pages/home.jsp").forward(request, response);
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
+    /**
+     * Handles HTTP GET requests to show the home page.
+     *
+     * @param request  the {@link HttpServletRequest} object that contains the request the client made to the servlet
+     * @param response the {@link HttpServletResponse} object that contains the response the servlet returns to the client
+     * @throws ServletException if the request could not be handled
+     * @throws IOException      if an input or output error occurs while the servlet is handling the GET request
+     */
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Forward to the home.jsp page
+        request.getRequestDispatcher("/WEB-INF/pages/home.jsp").forward(request, response);
+    }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
+    /**
+     * Handles HTTP POST requests. Forwards to {@code doGet()} since no special POST logic is needed.
+     *
+     * @param request  the {@link HttpServletRequest} object that contains the request the client made to the servlet
+     * @param response the {@link HttpServletResponse} object that contains the response the servlet returns to the client
+     * @throws ServletException if the request could not be handled
+     * @throws IOException      if an input or output error occurs while the servlet is handling the POST request
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Delegate POST requests to GET
+        doGet(request, response);
+    }
 }

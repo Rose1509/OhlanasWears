@@ -2,6 +2,8 @@ package com.OhlanasWears.util;
 
 import java.util.regex.Pattern;
 
+import jakarta.servlet.http.Part;
+
 /**
  * LMU ID: 23048677
  * NAME: Rose Khatiwada
@@ -140,6 +142,7 @@ public class ValidationUtil {
         }
     }
 
+    
     /**
      * Validates a price value to ensure it's a number between 0 and 100000.
      * 

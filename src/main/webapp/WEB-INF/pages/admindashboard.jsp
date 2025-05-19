@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -24,7 +26,7 @@
                 <a href="aboutus" class="menu-item"><i class="fas fa-info-circle"></i>About US</a>
             </nav>
             <div class="sidebar-footer">
-                <a href="login" class="logout-btn">
+                <a href="login" class="logout-btn" onclick="return confirmLogout();">
                     <i class="fas fa-sign-out-alt"></i>
                     Log out
                 </a>
@@ -54,7 +56,7 @@
                         <i class="fas fa-dollar-sign"></i>
                     </div>
                     <div class="stat-card-title">Total Revenue</div>
-                    <div class="stat-card-value">$24,580</div>
+                    <div class="stat-card-value">$<fmt:formatNumber value="${totalRevenue}" pattern="#,##0.00"/></div>
                     <div class="stat-change up">
                         <i class="fas fa-arrow-up"></i>
                         12.5% from last month
@@ -62,10 +64,10 @@
                 </div>
                 <div class="stat-card">
                     <div class="stat-card-icon orders">
-                        <i class="fas fa-shopping-cart"></i>
+                        <i class="fas fa-boxes"></i>
                     </div>
-                    <div class="stat-card-title">Orders</div>
-                    <div class="stat-card-value">420</div>
+                    <div class="stat-card-title">Stock</div>
+                    <div class="stat-card-value">${totalStock}</div>
                     <div class="stat-change up">
                         <i class="fas fa-arrow-up"></i>
                         8.2% from last month
@@ -75,8 +77,8 @@
                     <div class="stat-card-icon customers">
                         <i class="fas fa-users"></i>
                     </div>
-                    <div class="stat-card-title">Customers</div>
-                    <div class="stat-card-value">2815</div>
+                    <div class="stat-card-title">Highest Price Product</div>
+                    <div class="stat-card-value">$<fmt:formatNumber value="${highestPrice}" pattern="#,##0.00"/></div>
                     <div class="stat-change up">
                         <i class="fas fa-arrow-up"></i>
                         3.1% from last month
@@ -84,10 +86,10 @@
                 </div>
                 <div class="stat-card">
                     <div class="stat-card-icon average">
-                        <i class="fas fa-chart-line"></i>
+                        <i class="fas fa-tags"></i>
                     </div>
-                    <div class="stat-card-title">Average Order</div>
-                    <div class="stat-card-value">$58.5</div>
+                    <div class="stat-card-title">Total Product</div>
+                    <div class="stat-card-value">${totalProducts}</div>
                     <div class="stat-change down">
                         <i class="fas fa-arrow-down"></i>
                         1.2% from last month
@@ -102,46 +104,18 @@
                     <h2 class="section-title">Top Selling Products</h2>
                     <p class="section-subtitle">Your best performing products this month</p>
                     <div class="product-grid">
-                        <div class="product-item">
-                            <div class="product-info">
-                                <h4>Flare off shoulder T-shirt</h4>
-                                <p>Stock: 28</p>
+                        <c:forEach var="product" items="${topProducts}">
+                            <div class="product-item">
+                                <div class="product-info">
+                                    <h4>${product.name}</h4>
+                                    <p>Stock: ${product.stock}</p>
+                                </div>
+                                <div class="product-price">
+                                    <h4>$<fmt:formatNumber value="${product.price}" pattern="#,##0.00"/></h4>
+                                    <p>Sales: ${product.sales}</p>
+                                </div>
                             </div>
-                            <div class="product-price">
-                                <h4>$79.99</h4>
-                                <p>Sales: 100</p>
-                            </div>
-                        </div>
-                        <div class="product-item">
-                            <div class="product-info">
-                                <h4>Oversize denim jacket</h4>
-                                <p>Stock: 45</p>
-                            </div>
-                            <div class="product-price">
-                                <h4>$89.99</h4>
-                                <p>Sales: 87</p>
-                            </div>
-                        </div>
-                        <div class="product-item">
-                            <div class="product-info">
-                                <h4>Off-white Silk Shirt</h4>
-                                <p>Stock: 19</p>
-                            </div>
-                            <div class="product-price">
-                                <h4>$159.99</h4>
-                                <p>Sales: 75</p>
-                            </div>
-                        </div>
-                        <div class="product-item">
-                            <div class="product-info">
-                                <h4>Vintage Leather Jacket</h4>
-                                <p>Stock: 22</p>
-                            </div>
-                            <div class="product-price">
-                                <h4>$200.99</h4>
-                                <p>Sales: 53</p>
-                            </div>
-                        </div>
+                        </c:forEach>
                     </div>
                     <a href="product" class="view-all-btn" style="text-decoration: none; display: block;">View All Products</a>
                 </div>
@@ -151,36 +125,36 @@
                     <h2 class="section-title">Seasonal Distribution</h2>
                     <p class="section-subtitle">Current inventory by season</p>
                     <div class="seasonal-list">
-                        <div class="seasonal-item">
-                            <div class="season-name">Summer</div>
-                            <div class="season-percentage">86%</div>
-                        </div>
-                        <div class="seasonal-item">
-                            <div class="season-name">Winter</div>
-                            <div class="season-percentage">55%</div>
-                        </div>
+                        <c:forEach var="season" items="${seasonalDistribution}">
+                            <div class="seasonal-item">
+                                <div class="season-name">${season.key}</div>
+                                <div class="season-percentage">${season.value}%</div>
+                            </div>
+                        </c:forEach>
                     </div>
 
                     <!-- Recent Orders -->
                     <div class="recent-orders">
                         <h2 class="section-title">Recent Order</h2>
-                        <div class="order-item">
-                            <div class="order-info">
-                                <h4>Off-white Silk Shirt</h4>
-                                <p>$50.00</p>
+                        <c:forEach var="order" items="${recentOrders}">
+                            <div class="order-item">
+                                <div class="order-info">
+                                    <h4>${order.productName}</h4>
+                                    <p>$<fmt:formatNumber value="${order.totalPrice}" pattern="#,##0.00"/></p>
+                                </div>
+                                <div class="order-status ${order.status.toLowerCase()}">${order.status}</div>
                             </div>
-                            <div class="order-status pending">Pending</div>
-                        </div>
-                        <div class="order-item">
-                            <div class="order-info">
-                                <h4>Washed Baggy Jeans</h4>
-                                <p>$96.79</p>
-                            </div>
-                            <div class="order-status completed">Completed</div>
-                        </div>
+                        </c:forEach>
                     </div>
                 </div>
             </div>
+            
+            <!-- JavaScript for logout confirmation -->
+            <script>
+                function confirmLogout() {
+                    return confirm("Are you sure you want to log out?");
+                }
+            </script>
             
             <%
             String success = request.getParameter("success");

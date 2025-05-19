@@ -63,28 +63,34 @@ body, html {
 
 
 .products {
-	display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    display: flex;
+    flex-wrap: wrap;
     gap: 30px;
-    padding: 30px;
-    max-width: 2500px;
-    margin: 0 auto;
+    padding: 30px 18px; 
+    margin: 0;
     background-color: #A0A0A0;
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: space-between;
 }
+
 .product-card {
-    background-color: #F1EFEC ;
+    background-color: #F1EFEC;
     border-radius: 10px;
     padding: 15px;
     text-align: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-    min-height: 750px; 
-  
+    min-height: 750px;
+    flex: 1 1 calc(33.333% - 20px); 
+    box-sizing: border-box; 
+    margin: 0; 
 }
+
 .product-card:hover {
-	transform: scale(1.05);
-	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-	background-color: #B8B8B8;
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    background-color: #B8B8B8;
 }
 
 .product-card img {
@@ -96,13 +102,13 @@ body, html {
 }
 .product-card h3 {
 	font-family: 'Karla';
-	font-size: 2em;
+	font-size: 2.1em;
 	margin: 10px 0;
     color: #333;
 }
 
 .product-card .price {
-    font-size: 1.5em;
+    font-size: 1.6em;
     color: #FF0000;
     margin: 5px 0;
 }
@@ -123,13 +129,13 @@ body, html {
 }
 .product-card .rating p {
     color: #000000;
-    font-size: 0.9em;
+    font-size: 0.11em;
     margin-left: 5px;
 }
 
 .shop-now-btn {
     margin-top: 30px;
-    padding: 10px 20px;
+    padding: 15px 25px;
     background-color: #ff6b6b; 
     color: white;
     border: none;
@@ -143,4 +149,4 @@ body, html {
 .shop-now-btn:hover {
       background-color: #ff4c4c;
       transform: translateY(-3px); 
-}
+} 
